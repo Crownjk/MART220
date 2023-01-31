@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <title>
+            motion
+        </title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+        
+
+        <script>
+
+            var x = 155;
+            var y = 105;
+            var diameter = 40;
+            var circleX = 238;
+            var xChange = 5;
+
+
+            function setup (){
+                createCanvas(400,400);
+            }
+            function draw ()
+            {
+                background(150,50,100);
+                fill(200,150,90);
+                triangle(300,80,200,250,100,80);
+                fill(200,10,90);
+                circle(x,y,diameter);
+                fill(200,10,90);
+                circle(203,200,40);
+                fill(200,10,90);
+                circle(175,150,40);
+                fill(70,150,50);
+                circle(circleX,330,100);
+                fill(200,10,90);
+                circle(213,105,40);
+                fill(50,150,200);
+                textSize(30);
+                text('By Cat',280,390);
+                textSize(35);
+                fill(90,150,100);
+                text('In motion',10,35);
+                if(circleX > 400 || circleX < 0)
+                {
+                    xChange*=-1;
+                }
+                
+
+                circleX += xChange;
+                if(keyIsPressed)
+                {
+                    if(key == 'a')
+                    {
+                        x-=5;
+                    }
+                    else if(key == 'd')
+                    {
+                        x+=5
+                    }
+                    else if(key == 'w')
+                    {
+                        y-=5;
+                    }
+                    else if(key == 's')
+                    {
+                        y+=5;
+                    }
+                }
+
+
+            }
+            
+
+        </script>
+    </head>
+</html>
