@@ -11,4 +11,5 @@ class animation
         image(this.ninja,200, 350, 110,110); 
 
     }
+    
 }

@@ -17,14 +17,21 @@
             var ninjaObject;
             var ninjaObjects = [];
             var i = 0
+            var IdleStrings = [];
+            var runObjects;
+            var runObjects = [];
+            var r = 0
+            var RunStrings = [];
 
             function preload()
             {
-                ninja = loadImage("./images/idle__000.png");
+                ninja = loadImage("./images/Idle/Idle__000.png");
                 //img = loadImage('./images/Sebastian from Little Mermaid.jpg')
                 //img2 = loadImage('./images/IMG_2534.jpg')
                 img3 = loadImage('./images/IMG_3639.jpg')
                 fonts = loadFont('./fonts/Pixelfy.ttf')
+                IdleStrings = loadStrings("./images/Idle/Idle.txt");
+                RunStrings = loadStrings("./images/Run.txt");
             }
             function displaycounter()
             {
@@ -42,6 +49,15 @@
                     i = 0;
                 }
             }
+            function changer ()
+            {
+                r++;
+                console.log(r)
+                if(r >= runObjects.length)
+                {
+                    r = 0;
+                }
+            }
             function movefood()
             {
                 pizza.updatevariables();
@@ -51,6 +67,7 @@
                 createCanvas(500,500);
                 setInterval(displaycounter, 5000);
                 setInterval(changei, 100);
+                setInterval(changer, 20);
                 //image( img, 100, 200);
                 //image( img2, 300, 200);
                 image(img3, 200, 200);
@@ -59,27 +76,17 @@
                 pizza = new food(); 
                 setInterval(movefood, 1000);
                 //image(ninja,200,350, 110, 110);
-                ninjaObject = new animation("./images/idle__000.png");
-                ninjaObjects [0] = ninjaObject
-                ninjaObject = new animation("./images/idle__001.png");
-                ninjaObjects [1] = ninjaObject
-                ninjaObject = new animation("./images/idle__002.png");
-                ninjaObjects [2] = ninjaObject
-                ninjaObject = new animation("./images/idle__003.png");
-                ninjaObjects [3] = ninjaObject
-                ninjaObject = new animation("./images/idle__004.png");
-                ninjaObjects [4] = ninjaObject
-                ninjaObject = new animation("./images/idle__005.png");
-                ninjaObjects [5] = ninjaObject
-                ninjaObject = new animation("./images/idle__006.png");
-                ninjaObjects [6] = ninjaObject
-                ninjaObject = new animation("./images/idle__007.png");
-                ninjaObjects [7] = ninjaObject
-                ninjaObject = new animation("./images/idle__008.png");
-                ninjaObjects [8] = ninjaObject
-                ninjaObject = new animation("./images/idle__009.png");
-                ninjaObjects [9] = ninjaObject
-
+                for(var i = 0; i < IdleStrings.length; i++)
+                {
+                    ninjaObject = new animation(IdleStrings[i]);
+                    ninjaObjects [i] = ninjaObject
+                }
+                for (var r = 0; r < RunStrings.length; r++)
+                {
+                    runObject = new animation(RunStrings[r]);
+                    runObjects [r] = runObject
+                }
+               
             }
             function draw ()
             {
@@ -123,30 +130,27 @@
                     //fill(75,30,200);
 
                 //}
-                ninjaObjects [i].draw();
+                //ninjaObjects [i].draw();
+                //runObjects [r].draw();
                 pizza.drawfood();
                 circleObject.drawCircle();
-                circleX += xChange;
+                //circleX += xChange;
                 if(keyIsPressed)
                 {
-                    if(key == 'a')
+                    if(key == 'd')
                     {
-                        x-=5;
+                        console.log (r)
+                        runObjects [r].draw();
                     }
-                    else if(key == 'd')
+                    else
                     {
-                        x+=5
-                    }
-                    else if(key == 'w')
-                    {
-                        y-=5;
-                    }
-                    else if(key == 's')
-                    {
-                        y+=5;
+                        ninjaObjects [i].draw();
                     }
                     
-                    
+                }
+                else
+                {
+                    ninjaObjects [i].draw();
                 }
 
 
