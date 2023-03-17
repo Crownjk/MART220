@@ -22,12 +22,13 @@
             var runObjects = [];
             var r = 0
             var RunStrings = [];
+            var r1;
+            var r2;
+            const particles = [];
 
             function preload()
             {
-                ninja = loadImage("./images/Idle/Idle__000.png");
-                //img = loadImage('./images/Sebastian from Little Mermaid.jpg')
-                //img2 = loadImage('./images/IMG_2534.jpg')
+                //ninja = loadImage("./images/Idle/Idle__000.png");
                 img3 = loadImage('./images/IMG_3639.jpg')
                 fonts = loadFont('./fonts/Pixelfy.ttf')
                 IdleStrings = loadStrings("./images/Idle/Idle.txt");
@@ -52,7 +53,6 @@
             function changer ()
             {
                 r++;
-                console.log(r)
                 if(r >= runObjects.length)
                 {
                     r = 0;
@@ -64,26 +64,23 @@
             }
 
             function setup (){
-                createCanvas(500,500);
+                createCanvas(800,800);
                 setInterval(displaycounter, 5000);
                 setInterval(changei, 100);
-                setInterval(changer, 20);
-                //image( img, 100, 200);
-                //image( img2, 300, 200);
+                setInterval(changer, 100);
                 image(img3, 200, 200);
                 // create instance (object) of class
                 circleObject = new MyCircle(); //automatically calls constructor
                 pizza = new food(); 
                 setInterval(movefood, 1000);
-                //image(ninja,200,350, 110, 110);
                 for(var i = 0; i < IdleStrings.length; i++)
                 {
-                    ninjaObject = new animation(IdleStrings[i]);
+                    ninjaObject = new animation(IdleStrings[i], 130);
                     ninjaObjects [i] = ninjaObject
                 }
                 for (var r = 0; r < RunStrings.length; r++)
                 {
-                    runObject = new animation(RunStrings[r]);
+                    runObject = new animation(RunStrings[r], 130);
                     runObjects [r] = runObject
                 }
                
@@ -91,8 +88,8 @@
             function draw ()
             {
                 background(150,50,100);
-                //image(img3, 150, 370, 90, 150);
-                //image(img2, 300, 100, 190,190);
+                //r1 = new Rectangle(100,100,20,40);
+                //r2 = new Rectangle(100,210,30,20);
                 image(img3, imgx, 160, 105,105);
                 imgx++;
                 textSize(50);
@@ -101,33 +98,70 @@
                 fill(200,150,90);
                 circle(x,y,diameter);
                 fill(200,10,90);
-                textSize(30);
-                text('By Cat',380,490);
+                textSize(60);
+                text('health',95,495);
+                textSize(90);
+                text('By Cat',380,690);
                 textSize(35);
                 fill(90,150,100);
                 text('In motion',10,35);
                 //ninjaObjects [i].draw();
                 //runObjects [r].draw();
+                //r1.draw();
+                //r2.draw();
                 pizza.drawfood();
                 circleObject.drawCircle();
                 //circleX += xChange;
                 if(keyIsPressed)
                 {
-                    if(key == 'd')
+                    if (key == 'w')
                     {
-                        console.log (r)
+                        for (var q = 0; q < runObjects.length; q++)
+                        {
+                            runObjects[q].updateposition("left");
+                            ninjaObjects[q].updateposition("left");
+                        }
                         runObjects [r].draw();
                     }
-                    else
+                    if(key == 'f')
                     {
-                        ninjaObjects [i].draw();
+                        for (var t = 0; t < runObjects.length; t++)
+                        {
+                            runObjects[t].updateposition("up");
+                            ninjaObjects[t].updateposition("up");
+                        }
+                        runObjects [r].draw();
                     }
+                    if(key == 'd')
+                    {
+                        // a loop goes through all of the images and makes them move and repeat over and over again
+                        //for (var s = 0; s < runObjects.length; s++)
+                        //{
+                            runObjects[r].updateposition("right");
+                            ninjaObjects[r].updateposition("right");
+                       // }
+                        runObjects [r].draw();
+                    }
+                
                     
                 }
                 else
                 {
                     ninjaObjects [i].draw();
                 }
-
+                for (let i = 0; i < 5; i++)
+                {
+                    let p = new Particle();
+                    particles.push(p);
+                }
+                for (let i = particles.length - 1; i >= 0; i--)
+                {
+                    particles[i].update();
+                    particles[i].show();
+                    if (particles[i].finished()) 
+                    {
+                        particles.splice(i, 1);
+                    }
+                }
 
             }
