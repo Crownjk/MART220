@@ -114,7 +114,7 @@
                 //circleX += xChange;
                 if(keyIsPressed)
                 {
-                    if (key == 'w')
+                    if (key == 'a')
                     {
                         for (var q = 0; q < runObjects.length; q++)
                         {
@@ -123,7 +123,7 @@
                         }
                         runObjects [r].draw();
                     }
-                    if(key == 'f')
+                    if(key == 'w')
                     {
                         for (var t = 0; t < runObjects.length; t++)
                         {
@@ -135,11 +135,11 @@
                     if(key == 'd')
                     {
                         // a loop goes through all of the images and makes them move and repeat over and over again
-                        //for (var s = 0; s < runObjects.length; s++)
-                        //{
-                            runObjects[r].updateposition("right");
-                            ninjaObjects[r].updateposition("right");
-                       // }
+                        for (var s = 0; s < runObjects.length; s++)
+                        {
+                            runObjects[s].updateposition("right");
+                            ninjaObjects[s].updateposition("right");
+                        }
                         runObjects [r].draw();
                     }
                 

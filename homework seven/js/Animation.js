@@ -14,10 +14,11 @@ class animation
         if (this.direction == "left")
         {
             console.log (this.x)
+            push()
             translate(this.ninja.width, 0);
             scale (-1,1);
-            image(this.ninja,this.x, this.y, 110,110); 
-             
+            image(this.ninja,-this.x, this.y, 110,110); 
+            pop()
         }
        else
        {
@@ -35,7 +36,7 @@ class animation
         else if (direction == "left")
         {
      
-            this.x +=5
+            this.x -=5
         }
         else if (direction == "down")
         {
