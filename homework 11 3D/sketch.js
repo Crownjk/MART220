@@ -7,7 +7,7 @@ let explosion;
 let tiles;
 var loadImage;
 var Fonts;
-    //still need to add textures
+
 function preload()
 {
     explosion= loadImage('./images/explosion.jpg');
@@ -24,7 +24,7 @@ function setup()
 }
 function draw()
 {
-    background(150,140,200);
+    background(50,130,200);
     normalMaterial();
     console.log(shapeArray.length);
     for( var i = 0; i < shapeArray.length; i++)
@@ -58,18 +58,25 @@ function draw()
     texture(tiles);
     torus(45, 25);
     pop();
-        //is going to be a custome shape when everything starts to work!
+        
     push();
     rotateX(frameCount * 0.01);
     rotateY(frameCount * 0.01);
+    rotateZ(frameCount * 0.01);
     translate(-50, -50);
     beginShape();
-    //vertex(0,0,100,0,0);
-    //vertex(200,0,50,1,0);
-    //vertex(0,200,50,0,1);
-    //endshape(CLOSE);
+    vertex(-30,30);
+    vertex(0,65);
+    vertex(30,30);
+    vertex(65,0);
+    vertex(30,-20);
+    vertex(0,-75);
+    vertex(-30,-20);
+    vertex(-75,0);
+    texture(redbluegalaxy);
+    endShape(CLOSE);
     pop();
-    //supposed to change the locations of the box
+    
     textFont(Fonts)
     textSize(40);
     fill(200,80,150);
