@@ -48,4 +48,8 @@ class animation
         }
 
     }
+    iscolliding(r1)
+    {
+        return collideRectRect(this.x,this.y,this.ninja.width, this.ninja.height, r1.x, r1.y, r1.w, r1.h);
+    }
 }

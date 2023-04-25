@@ -10,7 +10,7 @@
             var img3;
             var fonts;
             var imgx = 100;
-            var mycircle;
+            var myCircle = 0;
             var x,y,diameter;
             var pizza;
             var ninja;
@@ -24,6 +24,9 @@
             var RunStrings = [];
             var r1;
             var r2;
+            var circles=[];
+            var xcircle, ycircle, dcircle;
+
             const particles = [];
 
             function preload()
@@ -83,23 +86,30 @@
                     runObject = new animation(RunStrings[r], 130);
                     runObjects [r] = runObject
                 }
+                for (var i = 0; i < 5; i++ )
+                {
+                    xcircle= random(100,800)
+                    ycircle= random(200, 800)
+                    dcircle= random(90)
+                    circles[i] = new MyCircle(xcircle, ycircle,dcircle, 120,30,190);
+                }
                
             }
             function draw ()
             {
-                background(150,50,100);
-                //r1 = new Rectangle(100,100,20,40);
-                //r2 = new Rectangle(100,210,30,20);
+                background(50,50,200);
+                r1 = new Rectangle(400,450,150,40);
+                r2 = new Rectangle(250,370,150,80);
                 image(img3, imgx, 160, 105,105);
                 imgx++;
                 textSize(50);
                 textFont(fonts)
                 text(counter,40,100);
-                fill(200,150,90);
+                fill(10,150,190);
                 circle(x,y,diameter);
-                fill(200,10,90);
+                fill(155,180,230);
                 textSize(60);
-                text('health',95,495);
+                text('health',75,695);
                 textSize(90);
                 text('By Cat',380,690);
                 textSize(35);
@@ -107,11 +117,15 @@
                 text('In motion',10,35);
                 //ninjaObjects [i].draw();
                 //runObjects [r].draw();
-                //r1.draw();
-                //r2.draw();
+                r1.draw();
+                r2.draw();
                 pizza.drawfood();
                 circleObject.drawCircle();
                 //circleX += xChange;
+                for (var i = 0; i < circles.length; i++)
+                {
+                    circles[i].drawCircle();
+                }
                 if(keyIsPressed)
                 {
                     if (key == 'a')
@@ -139,10 +153,20 @@
                         {
                             runObjects[s].updateposition("right");
                             ninjaObjects[s].updateposition("right");
+                            var collided = runObjects[s].iscolliding(r1)
+                            console.log (collided) 
                         }
                         runObjects [r].draw();
                     }
-                
+                    if(key =='s')
+                    {
+                        for (var s = 0; s < runObjects.length; s++)
+                        {
+                            runObjects[s].updateposition("down");
+                            ninjaObjects[s].updateposition("down");
+                        }
+                        runObjects[r].draw();
+                    }
                     
                 }
                 else

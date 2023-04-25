@@ -1,17 +1,23 @@
 class MyCircle{
 
     //constructor called one time
-    constructor()
+    constructor(x,y, diameter, redColor, greenColor, blueColor)
     {
+
+    
         //properties
-        x = 100;
-        y = 200;
-        diameter = 50;
+        this.x = x;
+        this.y = y;
+        this.diameter = diameter;
+        this.redColor = redColor;
+        this.greenColor = greenColor;
+        this.blueColor = blueColor;
     }
     
     //functions
     drawCircle()
     {
-        circle(x,y,diameter);
+        fill(this.redColor,this.greenColor, this.blueColor);
+        circle(this.x,this.y,this.diameter);
     }
 }
