@@ -24,8 +24,12 @@
             var RunStrings = [];
             var r1;
             var r2;
+            var r3;
+            var r4;
             var circles=[];
             var xcircle, ycircle, dcircle;
+            var sound;
+            var soundx;
 
             const particles = [];
 
@@ -36,6 +40,8 @@
                 fonts = loadFont('./fonts/Pixelfy.ttf')
                 IdleStrings = loadStrings("./images/Idle/Idle.txt");
                 RunStrings = loadStrings("./images/Run.txt");
+                sound = loadSound("game-bonus-144751.mp3");
+                soundx = loadSound("appears-142455.mp3");
             }
             function displaycounter()
             {
@@ -99,7 +105,9 @@
             {
                 background(50,50,200);
                 r1 = new Rectangle(400,450,150,40);
-                r2 = new Rectangle(250,370,150,80);
+                r2 = new Rectangle(20,70,150,80);
+                r3 = new Rectangle(550,75,150,90);
+                r4 = new Rectangle(10,360,200,100);
                 image(img3, imgx, 160, 105,105);
                 imgx++;
                 textSize(50);
@@ -119,6 +127,8 @@
                 //runObjects [r].draw();
                 r1.draw();
                 r2.draw();
+                r3.draw();
+                r4.draw();
                 pizza.drawfood();
                 circleObject.drawCircle();
                 //circleX += xChange;
@@ -143,6 +153,16 @@
                         {
                             runObjects[t].updateposition("up");
                             ninjaObjects[t].updateposition("up");
+                            console.log(r2.y)
+                            var collided2 = runObjects[t].iscolliding(r2)
+                            console.log (collided2)
+                            if (collided2)
+                            {
+                                if(!soundx.isPlaying())
+                                {
+                                    soundx.play()
+                                }
+                            }
                         }
                         runObjects [r].draw();
                     }
@@ -154,7 +174,18 @@
                             runObjects[s].updateposition("right");
                             ninjaObjects[s].updateposition("right");
                             var collided = runObjects[s].iscolliding(r1)
-                            console.log (collided) 
+                            //console.log (collided) 
+                            console.log (sound.isPlaying())
+                            if (collided) 
+                            {
+                                if (!sound.isPlaying())
+                                {
+                                    sound.play()
+                                    console.log ('playing my song')
+                                }
+                                
+                            }
+                            
                         }
                         runObjects [r].draw();
                     }
@@ -167,25 +198,29 @@
                         }
                         runObjects[r].draw();
                     }
+                    if (key == 'x')
+                    {
+                        for (let i = 0; i < 5; i++)
+                        {
+                            console.log(ninjaObjects[i],x)
+                            let p = new Particle(ninjaObjects[i].x, ninjaObjects[i].y);
+                            particles.push(p);
+                        }
+                        for (let i = particles.length - 1; i >= 0; i--)
+                        {
+                            particles[i].update();
+                            particles[i].show();
+                            if (particles[i].finished()) 
+                            {
+                                particles.splice(i, 1);
+                            }
+                        }
+                    }
                     
                 }
                 else
                 {
                     ninjaObjects [i].draw();
                 }
-                for (let i = 0; i < 5; i++)
-                {
-                    let p = new Particle();
-                    particles.push(p);
-                }
-                for (let i = particles.length - 1; i >= 0; i--)
-                {
-                    particles[i].update();
-                    particles[i].show();
-                    if (particles[i].finished()) 
-                    {
-                        particles.splice(i, 1);
-                    }
-                }
-
+          
             }
